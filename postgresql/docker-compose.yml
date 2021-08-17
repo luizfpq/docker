@@ -4,26 +4,14 @@ services:
   postgres:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: "Postgres2019!"
+      POSTGRES_PASSWORD: "Postgres2345!"
     ports:
       - "5432:5432"
     volumes:
-      - /media/vault/docker/postgresql/data:/var/lib/postgresql/data 
+      - /media/vault/docker_data/postgresql_data:/var/lib/postgresql/data 
     networks:
-      - postgres-network
-      
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "luizfpq@gmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "PgAdmin2019!"
-    ports:
-      - "16543:80"
-    depends_on:
-      - postgres
-    networks:
-      - postgres-network
+      - local-network
 
 networks: 
-  postgres-network:
-    driver: bridge
+  local-network:
+    driver: macvlan
